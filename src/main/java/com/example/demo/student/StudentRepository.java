@@ -11,6 +11,16 @@ import java.util.Optional;
 public interface StudentRepository
         extends JpaRepository<Student, Long> {
 
+    /**
+     * Finds a student by their email address.
+     *
+     * This method uses a JPA query with a named parameter ":email" to search
+     * for a student whose email address matches the provided value.
+     *
+     * @param email The email address of the student to find.
+     * @return An `Optional<Student>` object containing the found student
+     *         or `Optional.empty()` if no student is found.
+     */
     @Query("SELECT s FROM Student s WHERE s.email  = :email")
     Optional<Student> findStudentByEmail(@Param("email") String email);
 }
