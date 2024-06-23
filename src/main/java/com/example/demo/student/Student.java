@@ -8,8 +8,7 @@ import java.time.Period;
  * Represents a student entity in the database.
  *
  * This class is annotated with `@Entity` to indicate that it corresponds to a database table.
- * The `@Table` annotation (optional here) can be used to specify a custom table name if
- * you want it to be different from the class name ("student" by default).
+ * The `@Table` annotaton (optional here) can be used to specify a custom table
  */
 @Entity
 @Table // Can be used to specify a custom table name
