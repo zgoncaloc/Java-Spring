@@ -14,7 +14,7 @@ public class StudentConfig {
     /**
      * Creates a `CommandLineRunner` bean for populating the student repository with some initial data.
      *
-     * This method leverages Spring's `@Configuration` annotation to mark this class as a configuration bean.
+     * This method uses Spring's annotation to mark this class as a configuration bean.
      * It defines a bean of type `CommandLineRunner` using the `@Bean` annotation. The bean takes the `StudentRepository`
      * as a dependency and is executed after application startup.
      *
