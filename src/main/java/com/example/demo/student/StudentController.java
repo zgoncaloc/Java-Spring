@@ -79,13 +79,19 @@ public class StudentController {
      *                              if the new email address is already taken by another student.
      */
     @PutMapping(path = "{studentId}")
-    public void updateStuden(
+    public void updateStudent(
             @PathVariable("studentId") Long studentId,
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String email) {
                 studentService.updateStudent(studentId, name, email);
     }
 
+    @PatchMapping(path = "{studentId}")
+    public void partialUpdateStudent(
+            @PathVariable("studentId") Long studentId,
+            @RequestBody Student studentData) {
+        studentService.partialUpdateStudent(studentId, studentData);
+    }
 
 
 }

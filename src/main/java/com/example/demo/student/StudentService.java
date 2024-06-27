@@ -1,5 +1,6 @@
 package com.example.demo.student;
 
+import org.antlr.v4.runtime.atn.SemanticContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -95,7 +96,40 @@ public class StudentService {
 
     }
 
+    //Cleaner Update for partial Usage
+    @Transactional
+    public void partialUpdateStudent(Long studentId, Student studentData) {
+        Optional<Student> studentOptional = studentRepository.findById(studentId);
 
+        if (studentOptional.isEmpty()) {
+            throw new IllegalStateException("Student with id " + studentId + " does not exist");
+        }
+        Student student = studentOptional.get();
+        if (studentData.getName() != null && !studentData.getName().isEmpty()) {
+            if (Objects.equals(student.getName(), studentData.getName())) {
+                throw new IllegalStateException("Name is already taken");
+            }
+            student.setName(studentData.getName());
+        }
+        // Update email if provided, different from existing email, and unique
+        if (studentData.getEmail() != null && !studentData.getEmail().isEmpty() && !Objects.equals(student.getEmail(), studentData.getEmail())) {
+            Optional<Student> ExistingstudentOptional = studentRepository.findStudentByEmail(studentData.getEmail());
+            if (ExistingstudentOptional.isPresent()) {
+                throw new IllegalStateException("email is taken");
+            }
+            student.setEmail(studentData.getEmail());
+        }
+
+        if (studentData.getDob() != null && !Objects.equals(student.getDob(), studentData.getDob())) {
+            Optional<Student> ExistingstudentOptional = studentRepository.findStudentByDob(studentData.getDob());
+            if (ExistingstudentOptional.isPresent()) {
+                throw new IllegalStateException("dob is taken");
+            }
+            student.setDob(studentData.getDob());
+        }
+
+    }
 
 
 }
+

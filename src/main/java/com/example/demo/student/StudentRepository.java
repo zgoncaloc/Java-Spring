@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Repository
@@ -23,4 +24,8 @@ public interface StudentRepository
      */
     @Query("SELECT s FROM Student s WHERE s.email  = :email")
     Optional<Student> findStudentByEmail(@Param("email") String email);
+
+    @Query("SELECT s FROM Student s WHERE s.dob  = :dob")
+    Optional<Student> findStudentByDob(@Param("dob") LocalDate dob);
+
 }
