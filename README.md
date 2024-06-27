@@ -1,5 +1,7 @@
 # Java-Spring
 
+>Please visit Wiki for App Overview and Postman Requests.
+
 This application is a student management system built with Spring Boot that allows users to manage student data in a  PostgreSQL database.
 
 Functionalities:
